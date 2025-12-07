@@ -14,7 +14,6 @@ import 'package:mserp/themes/app_cololors.dart';
 import 'package:mserp/themes/theme_provider.dart';
 import 'package:provider/provider.dart';
 
-/// ================= Update Survey Screen =================
 class UpdateSurveyScreen extends StatelessWidget {
   final ResponseData responseDetails;
 
@@ -46,7 +45,6 @@ class UpdateSurveyScreen extends StatelessWidget {
   }
 }
 
-/// ================= Update Survey View =================
 class UpdateSurveyView extends StatefulWidget {
   final ResponseData responseDetails;
 
@@ -152,7 +150,6 @@ class _UpdateSurveyViewState extends State<UpdateSurveyView> {
     setState(() {}); // Refresh UI with loaded answers
   }
 
-  /// Format answers for API submission
   List<Map<String, dynamic>> _formatAnswersForApi() {
     return answers.entries
         .where((entry) => !filePaths.containsKey(entry.key))
