@@ -1,0 +1,61 @@
+
+import 'package:flutter/material.dart';
+
+IconData getFlutterIcon(String? apiName) {
+  if (apiName == null) return Icons.help_outline;
+
+  final iconMap = {
+    'ri-dashboard-line': Icons.dashboard_outlined,
+    'ri-shopping-bag-3-line': Icons.shopping_bag_outlined,
+    'ri-team-line': Icons.groups_outlined,
+    'ri-user-line': Icons.person_outline,
+    'ri-shield-user-line': Icons.shield_outlined,
+    'ri-shopping-cart-line': Icons.shopping_cart_outlined,
+    'ri-file-text-line': Icons.description_outlined,
+    'ri-repeat-line': Icons.repeat_outlined,
+    'ri-shopping-bag-line': Icons.shopping_bag_outlined,
+    'ri-truck-line': Icons.local_shipping_outlined,
+    'ri-price-tag-3-line': Icons.local_offer_outlined,
+    'ri-shopping-basket-line': Icons.shopping_basket_outlined,
+    'ri-arrow-go-back-line': Icons.arrow_back_outlined,
+    'ri-archive-line': Icons.archive_outlined,
+    'ri-box-3-line': Icons.inventory_2_outlined,
+    'ri-home-2-line': Icons.home_outlined,
+    'ri-exchange-line': Icons.swap_horiz_outlined,
+    'ri-pie-chart-2-line': Icons.pie_chart_rounded,
+    'ri-account-circle-line': Icons.account_balance_outlined,
+    'ri-cash-line': Icons.attach_money_outlined,
+    'ri-customer-service-2-line': Icons.support_agent_outlined,
+    'ri-group-line': Icons.group_outlined,
+    'ri-file-list-3-line': Icons.list_alt_outlined,
+    'ri-lightbulb-line': Icons.lightbulb_outline,
+    'ri-file-paper-line': Icons.description_outlined,
+    'ri-file-list-line': Icons.format_list_bulleted_outlined,
+    'ri-file-copy-line': Icons.file_copy_outlined,
+    'ri-briefcase-4-line': Icons.work_outline,
+    'ri-medal-line': Icons.military_tech_outlined,
+    'ri-building-line': Icons.business_outlined,
+    'ri-money-dollar-circle-line': Icons.paid_outlined,
+    'ri-settings-3-line': Icons.settings_outlined,
+    'ri-calendar-check-line': Icons.event_available_outlined,
+    'ri-file-paper-2-linec': Icons.receipt_outlined,
+    'ri-time-line': Icons.access_time_outlined,
+    'ri-calendar-line': Icons.calendar_today_outlined,
+    'ri-calendar-event-line': Icons.event_outlined,
+    'ri-time-fill': Icons.access_time,
+    'ri-qr-code-line': Icons.qr_code_outlined,
+    'ri-todo-line': Icons.checklist_outlined,
+    'ri-folder-2-line': Icons.folder_outlined,
+    'ri-task-line': Icons.task_outlined,
+    'ri-map-pin-line': Icons.location_on_outlined,
+    'ri-map-pin-2-line': Icons.place_outlined,
+    'ri-history-line': Icons.history_outlined,
+    'ri-megaphone-line': Icons.campaign_outlined,
+    'ri-message-2-line': Icons.message_outlined,
+    'ri-contacts-linec': Icons.contacts_outlined,
+    'ri-survey-linec': Icons.poll_outlined,
+    'ri-mail-line': Icons.mail_outlined,
+  };
+
+  return iconMap[apiName] ?? Icons.help_outline;
+}
