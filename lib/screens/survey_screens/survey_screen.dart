@@ -195,157 +195,168 @@ class _SurveyListViewState extends State<SurveyListView> {
   }
 
   Widget _buildSurveyCard(Survey survey, bool isDark) {
-    return Card(
-      margin: const EdgeInsets.only(bottom: 16),
-      elevation: 3,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      color: isDark ? AppColors.darkPrimaryLightColor : AppColors.colorWhite,
-      child: InkWell(
-        onTap: () {
-          print("Survey tapped: ${survey.title}");
-        },
-        borderRadius: BorderRadius.circular(12),
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: Text(
-                      survey.title,
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: isDark
-                            ? AppColors.colorWhite
-                            : AppColors.colorBlack,
+    return Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: Container(
+        decoration: BoxDecoration(
+          color: isDark ? AppColors.darkPrimaryLightColor : AppColors.colorWhite,
+          borderRadius: BorderRadius.circular(16),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.15),
+              blurRadius: 12,
+              offset:const Offset(0, 4),
+              spreadRadius: 1,
+            ),
+          ],
+        ),
+        child: InkWell(
+          onTap: () {
+            print("Survey tapped: ${survey.title}");
+          },
+          borderRadius: BorderRadius.circular(12),
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: Text(
+                        survey.title,
+                        textScaler:const TextScaler.linear(1.2),
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: isDark
+                              ? AppColors.colorWhite
+                              : AppColors.colorBlack,
+                        ),
                       ),
                     ),
-                  ),
-                  // _buildStatusChip(survey.status, isDark),
-                ],
-              ),
-
-              // Description
-              if (survey.description != null &&
-                  survey.description!.isNotEmpty) ...[
-                const SizedBox(height: 8),
-                Text(
-                  survey.description!,
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: isDark
-                        ? AppColors.colorGray
-                        : AppColors.colorBlack.withAlpha(120),
-                  ),
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
+                    // _buildStatusChip(survey.status, isDark),
+                  ],
                 ),
-              ],
 
-              const SizedBox(height: 12),
-
-              // Info Row
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Icon(
-                    Icons.help_outline,
-                    size: 16,
-                    color: isDark
-                        ? AppColors.colorGray
-                        : AppColors.colorBlack.withAlpha(120),
-                  ),
-                  const SizedBox(width: 4),
+                // Description
+                if (survey.description != null &&
+                    survey.description!.isNotEmpty) ...[
+                  const SizedBox(height: 8),
                   Text(
-                    '${survey.questions.length} Questions',
+                    survey.description!,
                     style: TextStyle(
-                      fontSize: 12,
+                      fontSize: 14,
                       color: isDark
                           ? AppColors.colorGray
                           : AppColors.colorBlack.withAlpha(120),
                     ),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ],
-              ),
 
-              const SizedBox(height: 12),
+                const SizedBox(height: 12),
 
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  if (survey.isPrivate)
+                // Info Row
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
                     Icon(
-                      Icons.lock_outline,
+                      Icons.help_outline,
                       size: 16,
-                      color: isDark ? AppColors.colorGray : AppColors.colorGray,
+                      color: isDark
+                          ? AppColors.colorGray
+                          : AppColors.colorBlack.withAlpha(120),
                     ),
+                    const SizedBox(width: 4),
+                    Text(
+                      '${survey.questions.length} Questions',
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: isDark
+                            ? AppColors.colorGray
+                            : AppColors.colorBlack.withAlpha(120),
+                      ),
+                    ),
+                  ],
+                ),
 
-                  const Spacer(),
-                  InkWell(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              StartSurveyScreen(surveyObj: survey),
-                        ),
-                      );
-                    },
-                    child: Container(
-                      width: 120,
-                      height: 40,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: isDark
-                            ? AppColors.colorBlack
-                            : Theme.of(context).primaryColor,
+                const SizedBox(height: 12),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    if (survey.isPrivate)
+                      Icon(
+                        Icons.lock_outline,
+                        size: 16,
+                        color: isDark ? AppColors.colorGray : AppColors.colorGray,
                       ),
-                      child: const Center(
-                        child: Text(
-                          "Start Survey",
-                          style: TextStyle(color: Colors.white),
-                          textScaler: TextScaler.linear(1),
+
+                    const Spacer(),
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                StartSurveyScreen(surveyObj: survey),
+                          ),
+                        );
+                      },
+                      child: Container(
+                        width: 110,
+                        height: 40,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(color : isDark
+                              ? AppColors.colorWhite
+                              : Theme.of(context).primaryColor.withOpacity(0.8), width: 1)
                         ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 10),
-                  InkWell(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              SurveyResponseScreen(surveyObj: survey),
-                        ),
-                      );
-                    },
-                    child: Container(
-                      width: 120,
-                      height: 40,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: isDark
-                            ? AppColors.colorBlack
-                            : Theme.of(context).primaryColor,
-                      ),
-                      child: const Center(
-                        child: Text(
-                          "Response",
-                          style: TextStyle(color: Colors.white),
-                          textScaler: TextScaler.linear(1),
+                        child: Center(
+                          child: Text(
+                            "Start Survey",
+                            style: TextStyle(color: isDark ? Colors.white : Theme.of(context).primaryColor),
+                            textScaler:const TextScaler.linear(1),
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  const SizedBox(width: 2),
-                ],
-              ),
-            ],
+                    const SizedBox(width: 10),
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                SurveyResponseScreen(surveyObj: survey),
+                          ),
+                        );
+                      },
+                      child: Container(
+                        width: 100,
+                        height: 40,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(color: isDark
+                              ? AppColors.colorWhite
+                              : Theme.of(context).primaryColor,width: 1)
+                        ),
+                        child: Center(
+                          child: Text(
+                            "Response",
+                            style: TextStyle(color: isDark ? Colors.white : Theme.of(context).primaryColor),
+                            textScaler:const TextScaler.linear(1),
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 2),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

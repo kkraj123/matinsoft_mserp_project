@@ -2,6 +2,7 @@ import 'package:dooz_color_picker/dooz_color_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:mserp/customeDesigns/custom_snackbar.dart';
 import 'package:mserp/customeDesigns/no_data_found_screen.dart';
 import 'package:mserp/networkSupport/base/GlobalApiResponseState.dart';
 import 'package:mserp/screens/authentication_view/login_screen/login_screen.dart';
@@ -83,7 +84,7 @@ class _SettingScreenState extends State<SettingScreen> {
                   ),
                 ),
                 child: BlocListener<ProfileBloc, GlobalApiResponseState>(
-                  listener: (context, state) {
+                  listener: (context, state) async{
                     switch (state.status) {
                       case GlobalApiStatus.loading:
                         LoadingDialog.show(
@@ -97,6 +98,15 @@ class _SettingScreenState extends State<SettingScreen> {
                           setState(() {
                             profileData = state.data.data;
                           });
+                        }else if(state is LogoutStateSuccess){
+                          showCustomSnackBar(
+                            context,
+                            backgroundColor: Colors.green,
+                            message: state.data.message ?? "Logout",
+                            icon: Icons.check,
+                          );
+                          await SharedPreferenceManager.clear();
+                          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => const LoginScreen()), (route) => false,);
                         }
                         break;
                       default:
@@ -124,7 +134,13 @@ class _SettingScreenState extends State<SettingScreen> {
 
   Widget profileCardView(profile, bool isDarkMode) {
     if (profile == null) {
-      return const Center(child: SizedBox(height: 40,width: 40, child: CircularProgressIndicator(),),);
+      return const Center(
+        child: SizedBox(
+          height: 40,
+          width: 40,
+          child: CircularProgressIndicator(),
+        ),
+      );
     }
 
     final imageUrl = profile.pic ?? '';
@@ -146,26 +162,21 @@ class _SettingScreenState extends State<SettingScreen> {
                     backgroundColor: Colors.grey.shade200,
                     child: ClipOval(
                       child: imageUrl.isEmpty
-                          ? Image.asset(
-                        'assets/icons/profile_img.jpg',
-                        width: 80,
-                        height: 80,
-                        fit: BoxFit.cover,
-                      )
+                          ?const Icon(Icons.person, size: 60,)/*Image.asset(
+                              'assets/icons/profile.png',
+                              width: 80,
+                              height: 80,
+                              fit: BoxFit.cover,
+                            )*/
                           : Image.network(
-                        imageUrl,
-                        fit: BoxFit.cover,
-                        width: 80,
-                        height: 80,
-                        errorBuilder: (context, error, stackTrace) {
-                          return Image.asset(
-                            'assets/icons/profile_img.jpg',
-                            fit: BoxFit.cover,
-                            width: 80,
-                            height: 80,
-                          );
-                        },
-                      ),
+                              imageUrl,
+                              fit: BoxFit.cover,
+                              width: 80,
+                              height: 80,
+                              errorBuilder: (context, error, stackTrace) {
+                                return const Icon(Icons.person, size: 60,);
+                              },
+                            ),
                     ),
                   ),
                   const SizedBox(width: 5),
@@ -934,13 +945,7 @@ class _SettingScreenState extends State<SettingScreen> {
               themeProvider,
             );
             if (shouldLogout) {
-              await SharedPreferenceManager.clear();
-
-              Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(builder: (context) => const LoginScreen()),
-                (route) => false,
-              );
+              context.read<ProfileBloc>().add(Logout());
             }
           },
           child: Container(

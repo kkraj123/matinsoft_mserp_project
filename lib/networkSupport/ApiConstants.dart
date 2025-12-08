@@ -1,12 +1,14 @@
 
 class ApiConstants {
   static const bool isProductionMode = true;
-  static String baseUrl = "https://mserp.matinsoftech.com/";
+  static String baseUrl = "https://app.sajiloscale.com/";
+  // static String baseUrl = "https://mserp.matinsoftech.com/";
 
   //authentication
   static String authUrl = "api/login";
   static String checkInCheckOutEndPoint = "api/company/check-in-out";
   static String attendanceEndPoint = "api/company/attendance/logs";
+  static String logoutEndPoint = "api/logout";
 
 
   //leave request api

@@ -8,3 +8,6 @@ abstract class ProfileEvent {
 class GetProfile extends ProfileEvent{
   GetProfile();
 }
+class Logout extends ProfileEvent{
+  Logout();
+}
