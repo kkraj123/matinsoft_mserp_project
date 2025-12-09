@@ -30,6 +30,8 @@ class ApiConstants {
   static String profileEndPoint = "api/company/profile";
 
 
+  //family dashboard
+  static String familyDashboardEndPoint = "api/company/family/user-dashboard";
 
 }
 
